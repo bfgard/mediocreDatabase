@@ -15,7 +15,7 @@ void Predicate::setParams(Parameter param) {
 
 string Predicate::toString() {
 	string predicate = ID + '(';
-	for (int i = 0; i < params.size(); i++) {
+    for (size_t i = 0; i < params.size(); i++) {
 		predicate += params[i].toString();
 		if (i < params.size() - 1) {
 			predicate += ',';

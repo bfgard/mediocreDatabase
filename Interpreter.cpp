@@ -90,7 +90,7 @@ void Interpreter::evaluateRules() {
 	output << "Rule Evaluation" << endl << endl;
 	int ruleSize = rulesList.size();
     int tupleCount = -1;
-	int converge = 0;
+    int converge = 0;
 	while (tupleCount != database.getTupleCount()) {
 		converge++;
 		tupleCount = database.getTupleCount();
@@ -306,7 +306,7 @@ string Interpreter::createName(vector<string>& v) {
 	}
 	return output;
 }
-/*
+
 void Interpreter::makeVarNames(Relation& newRelation, vector<string>& varNames) {
 	for (unsigned int j = 0; j < schemesList.size(); ++j) {
 		if (schemesList[j].getID() == newRelation.getName()) {
@@ -355,6 +355,7 @@ void Interpreter::evaluatePredicateJoins(int& i, int& schemeSize, vector<pair<in
 
 			//r1.setName(predName1);
 			if (j != preds.size() - 2) {
+                schemes.clear();
 				newRelation.clearSchemes();
 			}
 		}
@@ -408,11 +409,9 @@ void Interpreter::joinable(vector<pair<int, int>>& matches, Tuple& t1, Tuple& t2
 void Interpreter::findLiterals(Relation& r, vector<Parameter>& params, Predicate& pred) {
 	Scheme scheme = r.getScheme();
 	if (scheme.size() == 0)
-		return;
-	int paramSize = params.size();
+        return;
 	vector<int> varPos;
-	set<string> varName;
-	set<string> schemes;
+    set<string> varName;
 	vector<string> varNames;
 	map<string, int> schemeMatch;
 	/*
@@ -461,7 +460,7 @@ void Interpreter::findLiterals(Relation& r, vector<Parameter>& params, Predicate
 	}
 	*/
 
-	for (int i = 0; i < params.size(); ++i) {
+    for (size_t i = 0; i < params.size(); ++i) {
 		varNames.push_back(params[i].getValue());
 	}
 	r.rename(varPos, varNames);
@@ -491,8 +490,7 @@ void Interpreter::iterateTuples(vector<pair<int, int>>&matches,Relation& newRela
 
 void Interpreter::selectLiterals(Relation& r, vector<Parameter>& params, Predicate& pred) {
 	if (r.getScheme().size() == 0)
-		return;
-	int paramSize = params.size();
+        return;
 	vector<int> varPos;
 	set<string> varName;
 	set<string> schemes;
@@ -500,7 +498,7 @@ void Interpreter::selectLiterals(Relation& r, vector<Parameter>& params, Predica
     map<string,int> schemeMatch;
 	
 	vector<Parameter> params1 = pred.getParams();
-	for (int i = 0; i < params1.size(); ++i) {
+    for (size_t i = 0; i < params1.size(); ++i) {
 		schemes.insert(params1[i].getValue());
 	}
 	/*
@@ -556,13 +554,13 @@ void Interpreter::doSelect(Relation& r, vector<Parameter>& params, set<string>& 
 			r.selectValue(i, value);
 		}
 		else {
-			int varSize = varName.size();
+            size_t varSize = varName.size();
 			varName.insert(value);
 			if (varSize == varName.size())
 				varPos.push_back(i);
 		}
 	}
-	int schemeSize = schemeMatch.size();
+    size_t schemeSize = schemeMatch.size();
 	for (int i = 0; i < paramSize; ++i) {
 		string value = params[i].getValue();
 		pair<string, int> pair1 = { value, i };
@@ -578,7 +576,7 @@ void Interpreter::doSelect(Relation& r, vector<Parameter>& params, set<string>& 
 void Interpreter::noliterals(Predicate& pred, vector<int>& varPos, vector<Parameter>& params,vector<Parameter>& params1){
     if (varPos.size() == 0) {
         int paramSize = params.size();
-        for (int i = 0; i < pred.getParams().size(); ++i) {
+        for (size_t i = 0; i < pred.getParams().size(); ++i) {
             string v1 = params1[i].getValue();
             for (int j = 0; j < paramSize; ++j) {
                 string v2 = params[j].getValue();

@@ -1,0 +1,36 @@
+
+Schemes:
+  a(c,d)
+  b(x,y)
+  c(x)
+  d(c,c,c)
+  e(y)
+  f(g)
+  h(i)
+
+Facts:
+  b('T', 'N').
+  b('N', 'D').
+  b('V', 'V').
+  b('A', 'B').
+  b('J', 'C').
+  b('T', 'D').
+  b('D','D').
+  c('N').
+  d('T', 'J', 'J').
+  d('B', 'A', 'B').
+  f('Q').
+  h('B').
+
+Rules:
+  c(A) :- d('T',A,A).
+  c(A) :- d(A,x,A).
+  a(C,B) :- b(B,C).
+  e(D) :- a('N',D),a('D',D).
+  b(K,L) :- a(D,K),a(K,L).
+  e(q) :- b(x,y),b(z,q),c(q).
+  b(B,D) :- a(B,B),a(D,D).
+  d(A,B,C) :- h(A),e(B),f(C).
+
+Queries:
+  e(y)?

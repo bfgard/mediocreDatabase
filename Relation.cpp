@@ -69,7 +69,7 @@ void Relation::project(vector<int>& positions) {
     vector<string> tempSchemes;
 	for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end();++it) {
 		Tuple projT;
-		for (int i = 0; i < positions.size(); ++i) {
+        for (size_t i = 0; i < positions.size(); ++i) {
 			Tuple t = *it;
             projT.push_back(t[positions[i]]);
             if(varList.count(scheme[positions[i]]) == 0) {
@@ -96,7 +96,7 @@ string Relation::toString(bool print) {
 	for (set<Tuple>::iterator it = tuples.begin(); it != tuples.end();) {
 		Tuple t = *it++;
 		output += "  ";
-		for (int j = 0; j < scheme.size(); ++j) {
+        for (size_t j = 0; j < scheme.size(); ++j) {
             output += scheme[j] + "=" + t[j];
             if(j < scheme.size() - 1){
                 output += " ";
