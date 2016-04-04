@@ -42,7 +42,7 @@ void Interpreter::evaluateFacts() {
 			Parameter p = factsList[i].getParams()[j];
 			string value = p.getValue();
 			tuple.push_back(value);
-		}
+        }
 		database.setTuple(factName, tuple);
 	}
 	for (auto& names : factNames) {
